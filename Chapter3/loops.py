@@ -44,3 +44,29 @@ while bottles > 0:
     bottles -= 1
     print("Take one down, pass it around,")
     print(f"{bottles} bottles of beer on the wall.")
+
+# Breaks in loops
+# This would normally create an infinity loop, but not with the break
+while True:
+    print("Hello World!")
+    break
+# Your also able to break with an conditional
+for i in range(10):
+    print(i)
+    if i > 5:
+        break
+
+# Continue in loops
+# Continue allows us to skip the current iteration and move to the next without exiting the loop
+# To pull out all the even numbers
+for i in range(10):
+    if i % 2:
+        continue
+    print(i)
+# Modulo(mod for short) = performs a division operation on the variable and returns the remainder
+
+# Nested loops
+# loops can exist within themselves
+for i in range(10):
+    for j in range(10):
+        print(f"{i}{j}")
