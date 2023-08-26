@@ -28,18 +28,46 @@ from random import randint
 # ]
 
 # Coffee Shop Game
-print('CyberBank Coffee Shop Simulator 4000\n Version 1.0.0')
-print("Lets collect some information before we start\n")
+def welcome():
+    """Welcome to the game statements"""
+    print('CyberBank Coffee Shop Simulator 4000\n Version 1.0.0')
+    print("Lets collect some information before we start\n")
 # Get name and shop name
 # 1. Set name and shop_name to False
 # 2. Use while not name and shop_name to continue to prompt for a non empty string
-name = False
-while not name:
-    name = input("What is your name? ")
+def prompt(display="Please input a string", require=True):
+    """Help with all the input fields"""
+    if require:
+        s = False
+        while not s:
+            s = input(display + " ")
+    else:
+        s = input(display + ' ')
+    return s
 
-shop_name = False
-while not shop_name:
-    shop_name = input(f"What is the name of {name}'s coffee shop? ")
+def daily_stats(cash_on_hand, weather, coffee_inventory):
+    """Display game inventory at beginning of new day"""
+    print(f"You have ${cash_on_hand} cash on hand and the temperature is {weather}")
+    print(f"You have enough coffee on hand to make {coffee_inventory} cups.")
+
+def convert_to_float(s):
+    """Check if input is a float"""
+    # if conversion fails assign 0
+    try:
+        f = float(s)
+    except ValueError:
+        f = 0
+    return f
+
+def get_weather():
+    """Get a random number to be used as the weather"""
+    return randint(20, 90)
+# Print welcome message
+welcome()
+
+# Get name and store name
+name = prompt("What is your name?")
+shop_name = prompt(f"What is the name of {name}'s coffee shop?")
 
 # Display what we have
 print("\nGreat. Here's what we've collected so far.\n")
@@ -60,39 +88,34 @@ while running:
     # Display the day and add a "fancy" text effect
     print(f"\n-----| Day {day} @ {shop_name} |-----")
     # Generate a random temp between 20 and 90
-    temperature = randint(20, 90)
+    temperature = get_weather()
     # Display cash and weather
-    print(f"You have ${cash} cash and it's {temperature} degrees.")
-    print(f"You have coffee on hand to make {coffee} cups.")
+    daily_stats(cash, temperature, coffee)
     # Get the price for the coffee
     print(f"\nThanks, {name}. Let's set some initial pricing.\n")
-    cup_price = False
-    while not cup_price:
-        cup_price = input("What do you want to charger per cup of coffee? ")
-        try:
+    cup_price = prompt("What do you want to charger per cup of coffee?")
+    try:
+        # checks for cup price
+        cup_price = float(cup_price)
+        # validates that the cup price is above zero
+        if cup_price == 0:
+            print("Your not running a homeless shelter.\nCoffee must be greater than 0")
+            cup_price = prompt("What do you want to charger per cup of coffee?")
+        else:
             cup_price = float(cup_price)
-            if cup_price == 0:
-                print("Your not running a homeless shelter.\nCoffee must be greater than 0")
-                cup_price = False
-            else:
-                cup_price = float(cup_price)
-        except Exception as e:
-            print(str(e))
-            cup_price = False
-    else:
-        print(f"\nYour first cup of coffee will sell for ${cup_price}.\n")
+    except ValueError:
+        # If there is a value error it will ask you again
+        cup_price = prompt("What do you want to charger per cup of coffee?")
+
+    print(f"\nYour first cup of coffee will sell for ${cup_price}.\n")
     print("\nYou can buy advertising to help promote sales")
     # Input on how much user wants to spend on advertisement
-    advertise = input("How much would you like to spend on advertisement today (0 is none)? ")
+    advertise = prompt("How much would you like to spend on advertisement today (0 is none)?", False)
     # convert advertise to a float
     # If it fails, assign it to 0
-    try:
-        advertise = float(advertise)
-    except ValueError as e:
-        advertise = 0
-    finally:
-        # Deduct advertising from cash on hand
-        cash -= advertise
+    advertise = convert_to_float(advertise)
+    # Deduct advertising from cash on hand
+    cash -= advertise
     # TODO: Calculate today's performance
     # TODO: Display today's performance
 
