@@ -31,10 +31,16 @@ from random import randint
 print('CyberBank Coffee Shop Simulator 4000\n Version 1.0.0')
 print("Lets collect some information before we start\n")
 # Get name and shop name
-name = input("What is your name? ")
-shop_name = input(f"What is the name of {name}'s coffee shop? ")
+# 1. Set name and shop_name to False
+# 2. Use while not name and shop_name to continue to prompt for a non empty string
+name = False
+while not name:
+    name = input("What is your name? ")
 
-print(f"\nThanks, {name}. Let's set some initial pricing.\n")
+shop_name = False
+while not shop_name:
+    shop_name = input(f"What is the name of {name}'s coffee shop? ")
+
 # Display what we have
 print("\nGreat. Here's what we've collected so far.\n")
 print(f"Your name is {name} and your opening {shop_name}!")
@@ -57,15 +63,36 @@ while running:
     temperature = randint(20, 90)
     # Display cash and weather
     print(f"You have ${cash} cash and it's {temperature} degrees.")
-    print(f"You have coffee on hand to make {coffee} cups.\n")
+    print(f"You have coffee on hand to make {coffee} cups.")
     # Get the price for the coffee
-    cup_price = input("What do you want to charger per cup of coffee? ")
-    print(f"Your first cup of coffee will sell for ${cup_price}.\n")
+    print(f"\nThanks, {name}. Let's set some initial pricing.\n")
+    cup_price = False
+    while not cup_price:
+        cup_price = input("What do you want to charger per cup of coffee? ")
+        try:
+            cup_price = float(cup_price)
+            if cup_price == 0:
+                print("Your not running a homeless shelter.\nCoffee must be greater than 0")
+                cup_price = False
+            else:
+                cup_price = float(cup_price)
+        except Exception as e:
+            print(str(e))
+            cup_price = False
+    else:
+        print(f"\nYour first cup of coffee will sell for ${cup_price}.\n")
     print("\nYou can buy advertising to help promote sales")
     # Input on how much user wants to spend on advertisement
-    advertise = float(input("How much would you like to spend on advertisement today (0 is none)? "))
-    # Deduct advertising from cash on hand
-    cash -= advertise
+    advertise = input("How much would you like to spend on advertisement today (0 is none)? ")
+    # convert advertise to a float
+    # If it fails, assign it to 0
+    try:
+        advertise = float(advertise)
+    except ValueError as e:
+        advertise = 0
+    finally:
+        # Deduct advertising from cash on hand
+        cash -= advertise
     # TODO: Calculate today's performance
     # TODO: Display today's performance
 
