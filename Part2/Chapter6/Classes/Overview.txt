@@ -1,0 +1,10 @@
+Combining our data structure and functions = Classes
+
+Object-Oriented Programming
+    Objects contain code and data are modeled from Classes
+    Clustering our logic(functions) alongside our data, better defining our goals
+
+Class = a structure that can contain both data(variables) and logic(functions) in a single, reuseable container
+    - classes don't do anything by themselves
+    - When you want to make use of a class create an Object 
+Methods = the logic(functions)
