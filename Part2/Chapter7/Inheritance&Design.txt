@@ -1,0 +1,2 @@
+Inheritance in object-oriented Programming = is a way for a class to be based on another class 
+You'll have many classes of furniture but only one living room
