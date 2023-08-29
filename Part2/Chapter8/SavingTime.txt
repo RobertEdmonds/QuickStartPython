@@ -1,0 +1,36 @@
+Saving Time with Dataclasses
+    Chapter Overview
+        - The Dataclasses module can save you a lot of Time
+        - Instance variables can be created automatically with dataclasses 
+        - The @dataclasses decorator can be customized with keyword arguments
+    
+    Automatic Instance Variables 
+        - dataclasses is an import from dataclass 
+        - The @dataclass decorator will automatically add a __init__ method(see auto_inst_var.py)
+        - The format for instance variables is the variable name, then a colon, then the type of variable(str, int, float, boolean)
+    
+    Dataclass Features
+        - The argument controls the features that the decorator injects into the class that is defined on the next line
+            - @dataclass(init=True, repr=True, eq=True, order=False, frozen=False)
+            - you don't have to include all these arguments just the ones you want to use
+        init 
+            - default is true 
+            - automatically generate the __init__ method
+        repr 
+            - allows our class to represent itself as a string
+            - default is true
+        eq 
+            - default is true 
+            - will allow for a comparison of two objects from the same class using == operator
+            - we have the option to define it ourselves, as with any other method
+        order
+            - default is False
+            - dataclass automatically creates if True
+                - __lt__ (less_than)
+                - __le__ (less_than_or_equal)
+                - __gt__ (greater_than)
+                - __ge__ (greater_than_or_equal)
+        frozen
+            - default is False
+            - if True, objects will be set to read-only(immutable)
+                - This allows the class to be stored in a set or as a key in a dictionary
