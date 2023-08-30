@@ -1,0 +1,58 @@
+Reusing Code With Modules and Packages
+    - Chapter Overview
+        - A module is a Python program file
+        - Modules can be used in other Python programs
+        - Packages are collections of modules
+    - Modules = simply Python code files that provide one or more classes, functions, or variables
+        - create a reuseable package that can be used in other programs 
+        - doesn't have to be written in python the interpreter will make them accessible in python
+
+    Namespaces
+        - We specify the name of the namespace, then a dot, before the resource ao Python knows how to find it 
+        - How the import works
+            - import function brings into the current code all the classes, functions, and variables that are defined in the module
+            - we can reference them with the name of the module 
+        - Namespace
+            - a collection of code that exists in a separate space
+            - module.name_space 
+            - to access code from another scope you need a pointer
+    
+    Importing Modules 
+        - import name 
+            - name refers to the name of the module 
+        - to change the reference name
+            - import local as robert
+                - robert is the reference to the local module 
+            - would not recommend unless naming conflict or module name is to long
+        - in need of a specific function and not the whole module 
+            - from email import parser
+                - email in the module and parser is the function you need
+                - the namespace would be parser to call on in the code 
+        - vars(module) function lists the variables in the class 
+        - dir(module) produce a list of functions and modules 
+        - help(module) provides a reference for using the module without requiring internet access 
+            - we can search for specific text with the / key 
+            - to quit out hit the Q key 
+    
+    Creating Your Own Modules 
+        - Module is just a python file 
+        - import module is sharing the python file to another file
+            - you don't need to add the .py for python to find the file
+    
+    Standard Modules
+        - The modules that are standard with every initial python start
+        - https://docs.python.org/3/py-modindex.html
+    
+    Packages 
+        - package = is simply a collection of regular Python program files that are arranged in a structure pattern
+        - __init__.py file must be in the folder that you want to treat as a package 
+        - import all the files into __init__.py file 
+            - from .first_module import *
+            - from .second_module import *
+                - the * is to import all the classes in that file
+        - then you can call on the folder and have access to all the files that are imported into the __init__.py file 
+            - import folder 
+                - put this where you want to ask for the specific class 
+            - example 
+                - import calculations
+                    - d = calculations.Distance(5)

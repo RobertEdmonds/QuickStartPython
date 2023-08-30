@@ -1,65 +1,8 @@
-"""Making a coffee shop game in the terminal"""
-# Import item to produce random numbers for the temperature
+"""Runs the Coffee Shop Loop"""
+# pylint: disable=undefined-variable
 import random
-# Need a list of days that include
-    # pricing, advertisement budget, sales, weather
-# sales = [
-#     {
-#         "day": 1,
-#         "coffee_inv": 100,
-#         "advertising": "10",
-#         "temp": 68,
-#         "cups_sold": 16
-#     },
-#     {
-#         "day": 2,
-#         "coffee_inv": 84,
-#         "advertising": "15",
-#         "temp": 72,
-#         "cups_sold": 20
-#     },
-#     {
-#         "day": 3,
-#         "coffee_inv": 64,
-#         "advertising": "5",
-#         "temp": 78,
-#         "cups_sold": 10
-#     }
-# ]
-
-# Coffee Shop Game
-def welcome():
-    """Welcome to the game statements"""
-    print('CyberBank Coffee Shop Simulator 4000\n Version 1.0.0')
-    print("Lets collect some information before we start\n")
-# Get name and shop name
-# 1. Set name and shop_name to False
-# 2. Use while not name and shop_name to continue to prompt for a non empty string
-def prompt(display="Please input a string", require=True):
-    """Help with all the input fields"""
-    if require:
-        s = False
-        while not s:
-            s = input(display + " ")
-    else:
-        s = input(display + ' ')
-    return s
-
-def convert_to_float(s):
-    """Check if input is a float"""
-    # if conversion fails assign 0
-    try:
-        f = float(s)
-    except ValueError:
-        f = 0
-    return f
-
-def x_of_y(x, y):
-    num_list = []
-    # Returns a list of x copies of y
-    for i in range(x):
-        num_list.append(y)
-    return num_list
+import re
+from utilities import *
 
 class CoffeeShopSimulator:
     """Simulator Class for the Coffee Shop game"""
@@ -217,17 +160,3 @@ class CoffeeShopSimulator:
         # Generate a random temperature between 20 and 90
         # We'll consider seasons later on, but this is good enough for now
         return random.choice(self.temps)
-
-
-# Print welcome message
-welcome()
-
-# Get name and store name
-t_name = prompt("What is your name?")
-t_shop_name = prompt(f"What is the name of {t_name}'s coffee shop?")
-
-# Create the game object
-game = CoffeeShopSimulator(t_name, t_shop_name)
-
-# Run the Game
-game.run()
