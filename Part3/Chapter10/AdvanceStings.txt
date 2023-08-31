@@ -1,0 +1,11 @@
+Advance String 
+    Chapter Overview
+        - Python contains extensive test manipulation functionality
+        - Using regular expression is a powerful way to spot patterns in text 
+        - Comparison data saves resources 
+    - Strings are also objects and therefore have built-in functionality
+
+    Standard String Operations
+        Finding and Replacing Text 
+            - common task is to search and modify strings
+            - use the find method
