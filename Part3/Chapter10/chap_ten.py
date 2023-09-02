@@ -52,4 +52,3 @@ if value.strip().isalpha():
 # Check if alphanumeric
 if value.strip().isalnum():
     print(f"{value} is a alphanumeric")
-

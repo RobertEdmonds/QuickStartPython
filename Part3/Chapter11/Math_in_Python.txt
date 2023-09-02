@@ -1,0 +1,14 @@
+Math in Python
+    Chapter Overview
+        - Python is frequently used for math, science, and statistics
+        - Python primarily works in integers and floating-point math
+        - Python provides excellent statistical and time/date functionality
+    Integer Math
+        - Most math is performed on integers 
+        Addition, Subtraction, Multiplication, Division
+            Order of Operations
+                - Parentheses, Exponents, Multiply, Divide, Add, Subtract 
+                - PEMDAS 
+        The Math Module 
+            - adds a lot of math functionality to Python
+            - import math 
