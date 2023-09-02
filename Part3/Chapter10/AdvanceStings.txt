@@ -9,3 +9,7 @@ Advance String
         Finding and Replacing Text 
             - common task is to search and modify strings
             - use the find method
+
+    Regular Expression(regex)
+        - tells python how to search through strings and match specific portions
+        

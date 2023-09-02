@@ -19,3 +19,6 @@ game = CoffeeShopSimulator(t_name, t_shop_name)
 
 # Run the game
 game.run()
+
+# Say goodbye
+print("\n Thanks for playing. Have a great rest of your day! \n")

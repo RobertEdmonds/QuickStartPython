@@ -42,23 +42,21 @@ class CoffeeShopSimulator:
             self.daily_stats(temperature)
 
             # Get price of a cup of coffee
-            cup_price = prompt("What do you want to charger per cup of coffee?")
-            restrict = True
-            while restrict:
-                try:
-                    # checks for cup price
-                    cup_price = float(cup_price)
-                    # validates that the cup price is above zero
-                    if cup_price == 0:
-                        print("Your not running a homeless shelter.\nCoffee must be greater than 0")
-                        cup_price = prompt("What do you want to charger per cup of coffee?")
-                    else:
-                        cup_price = float(cup_price)
-                        break
-                except ValueError:
-                    # If there is a value error it will ask you again
-                    print("Must be a numerical value")
-                    cup_price = prompt("What do you want to charger per cup of coffee?")
+            response = prompt(
+                "What do you want to charge per cup of coffee? (type exit to quit)")
+            if re.search("^exit", response, re.IGNORECASE):
+                running = False
+                continue
+            else:
+                cup_price = int(response)
+
+            # Do they want to buy more coffee inventory?
+            response = prompt(
+                "Want to buy more coffee? (hit ENTER for none or enter number)", False)
+
+            if response:
+                if not self.buy_coffee(response):
+                    print("Could not buy additional coffee.")
 
             # Get advertising spend
             print("\nYou can buy advertising to help promote sales")
@@ -88,6 +86,11 @@ class CoffeeShopSimulator:
             # Subtract inventory
             self.coffee_inventory -= cups_sold
 
+            if self.cash < 0:
+                print("\n:( GAME OVER! You ran out of cash.")
+                running = False
+                continue
+
             # Before we loop around, add a day
             self.increment_day()
 
@@ -109,6 +112,20 @@ class CoffeeShopSimulator:
         # We technically don't need this, but why make the next step
         # Read from the sales list when we have the data right here
         return cups_sold
+
+    def buy_coffee(self, amount):
+        """For adding coffee to inventory"""
+        try:
+            i_amount = int(amount)
+        except ValueError:
+            return False
+
+        if i_amount <= self.cash:
+            self.coffee_inventory += i_amount
+            self.cash -= i_amount
+            return True
+        else:
+            return False
 
     def make_temp_distribution(self):
         """Gets the x and y value on what the temperatures might be"""
@@ -152,7 +169,12 @@ class CoffeeShopSimulator:
 
     def daily_sales(self, temperature, advertising):
         """Returns how many sales were made that day"""
-        return int((self.TEMP_MAX - temperature)*(advertising * .5))
+        sales = int((self.TEMP_MAX - temperature)*(advertising * .5))
+        if sales > self.coffee_inventory:
+            sales = self.coffee_inventory
+            print(
+                "You would have sold more coffee but you ran out. Be sure to buy additional inventory.")
+        return sales
 
     @property
     def weather(self):
