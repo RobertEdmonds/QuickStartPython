@@ -1,11 +1,9 @@
 """Runs the Coffee Shop Loop"""
 # pylint: disable=undefined-variable
 # Import needed modules
+import pickle
 import random
 import re
-import numpy
-from utilities import *
-
 
 class CoffeeShopSimulator:
 
@@ -17,14 +15,18 @@ class CoffeeShopSimulator:
     # (higher produces more realistic curve)
     SERIES_DENSITY = 300
 
+    # Save game file
+    SAVE_FILE = "savegame.dat"
+
     # Faux temp distributions. We'll do this better
     # later with a bell curve, but for now a quick hack
 
-    def __init__(self, player_name, shop_name):
+    def __init__(self):
 
-        # Set player and coffee shop names
-        self.player_name = player_name
-        self.shop_name = shop_name
+        print("Let's collect some information before we start the game.\n")
+        self.player_name = self.prompt("What is your name?", True)
+        self.shop_name = self.prompt(
+            "What do you want to name your coffee shop?", True)
 
         # Current day number
         self.day = 1
@@ -57,17 +59,17 @@ class CoffeeShopSimulator:
             self.daily_stats(temperature)
 
             # Get price of a cup of coffee (but provide an escape hatch)
-            response = prompt(
+            response = self.prompt(
                 "What do you want to charge per cup of coffee? (type exit to quit)")
             if re.search("^exit", response, re.IGNORECASE):
                 running = False
                 continue
             else:
-                cup_price = int(response)
+                cup_price = float(response)
 
             # Do they want to buy more coffee inventory?
             print("\nIt costs $1 for the necessary inventory to make a cup of coffee.")
-            response = prompt(
+            response = self.prompt(
                 "Want to buy more so you can make more coffee? (ENTER for none or enter number)", False)
 
             if response:
@@ -76,11 +78,11 @@ class CoffeeShopSimulator:
 
             # Get price of a cup of coffee
             print("\nYou can buy advertising to help promote sales.")
-            advertising = prompt(
+            advertising = self.prompt(
                 "How much do you want to spend on advertising (0 for none)?", False)
 
             # Convert advertising into a float
-            advertising = convert_to_float(advertising)
+            advertising = self.convert_to_float(advertising)
 
             # Deduct advertising from cash on hand
             self.cash -= advertising
@@ -106,6 +108,10 @@ class CoffeeShopSimulator:
 
             # Before we loop around, add a day
             self.increment_day()
+
+            # Save the game
+            with open(self.SAVE_FILE, mode="wb") as f:
+                pickle.dump(self, f)
 
     def simulate(self, temperature, advertising, cup_price):
         # Find out how many cups were sold
@@ -139,16 +145,30 @@ class CoffeeShopSimulator:
             return False
 
     def make_temp_distribution(self):
-        # Create series of numbers between TEMP_MIN and TEMP_MAX
-        series = numpy.linspace(
-            self.TEMP_MIN, self.TEMP_MAX, self.SERIES_DENSITY)
+        # This is not a good bell curve, but it will do for now
+        # until we get to more advanced mathematics
+        temps = []
 
-        # Obtain mean and standard deviation from the series
-        mean = numpy.mean(series)
-        std_dev = numpy.std(series)
+        # First, find the average between TEMP_MIN and TEMP_MAX
+        avg = (self.TEMP_MIN + self.TEMP_MAX) / 2
+        # Find the distance between TEMP_MAX and the average
+        max_dist_from_avg = self.TEMP_MAX - avg
 
-        # Calculate probability density and return the list it creates
-        return (numpy.pi * std_dev) * numpy.exp(-0.5 * ((series - mean) / std_dev) ** 2)
+        # Loop through all possible temperatures
+        for i in range(self.TEMP_MIN, self.TEMP_MAX):
+            # How far away is the temperature from average?
+            # abs() gives us the absolute value
+            dist_from_avg = abs(avg - i)
+            # How far away is the dist_from_avg from the maximum?
+            # This will be lower for temps at the extremes
+            dist_from_max_dist = max_dist_from_avg - dist_from_avg
+            # If the value is zero, make it one
+            if dist_from_max_dist == 0:
+                dist_from_max_dist = 1
+            # Append the output of x_of_y to temps
+            for t in self.x_of_y(int(dist_from_max_dist), i):
+                temps.append(t)
+        return temps
 
     def increment_day(self):
         self.day += 1
@@ -192,3 +212,30 @@ class CoffeeShopSimulator:
         # Generate a random temperature between 20 and 90
         # We'll consider seasons later on, but this is good enough for now
         return int(random.choice(self.temps))
+    
+    @staticmethod
+    def prompt(display="Please input a string", require=True):
+        if require:
+            s = False
+            while not s:
+                s = input(display + " ")
+        else:
+            s = input(display + " ")
+        return s
+
+    @staticmethod
+    def convert_to_float(s):
+        # If conversion fails, assign it to 0
+        try:
+            f = float(s)
+        except ValueError:
+            f = 0
+        return f
+
+    @staticmethod
+    def x_of_y(x, y):
+        num_list = []
+        # Return a list of x numbers of y
+        for i in range(x):
+            num_list.append(y)
+        return num_list

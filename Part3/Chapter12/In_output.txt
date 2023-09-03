@@ -1,0 +1,44 @@
+Input and Output
+    Chapter Overview
+        - Computers accept input, process data, and generate Output
+        - Python can write and read to the disk in multiple modes and encoding schemes
+        - Serialization lets us save an object to disk for later recreation
+    - Computers do three main parts
+        - Collecting Input 
+        - Processing Those Data
+        - Outputting Results
+    - Phrase "Input and Output" = I/O 
+        - Input = data that is provided to the computer 
+        - Output = The result of computation and can be displayed on the screen, sent over network, or saved to disk
+
+    Disk I/O 
+        - Reading and writing text files
+            - Text Files = simply files filled with string data
+        - Sample disk_io.py(lines 2-18)
+            - With the with statement paired with open(to open or create the file(fox.txt)),
+                for writing or reading(mode="w"(for writing) mode="r"(for reading)),
+                with an encoding of UTF-8
+            - upon opening it returns a handle as f 
+            - with the file being open we call f.write(data)(to write) or f.read()(to read)
+        Reading Part of a File 
+            - Sample disk_io.py(lines 13-14)
+                - if you put a number in the f.read(16) it will read the first 16 characters
+            - when you want to break it up into small chunks
+                - you will have to switch the mode into binary(mode="rb") and you won't need to put the encoding 
+                    - with open("fox.txt", mode="rb") as f:
+                        - while (c := f.read(32)):
+                            - do something
+        Working with Multiple Lines 
+            - A more useful way of reading text in chunks is with readlines method
+                - with open("fox.txt", mode="r") as f:
+                    while (line := f.readlines()):
+                        # do something with the line 
+        Standard I/O 
+            -Standard Out(stdout) = output text to the screen 
+            -Standard In(stdin) = receive input from the keyboard
+            - Sample disk_io.py(lines 21-30)
+        Serialization with Pickle
+            - Serialization = The process of describing every detail of an object in a text format that is stored in a string 
+            - Sample disk_io.py(lines 32-43)
+            - customer.dat is a standard for binary data 
+            - pickle can be insecure

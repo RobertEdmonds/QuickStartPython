@@ -2,23 +2,33 @@
 # pylint: disable=no-name-in-module
 # pylint: disable=undefined-variable
 # Import all functions from the utility module
-from utilities import *
+import pickle
+import re
+from pathlib import Path
 
 # Import the game class from the coffee_shop_simulator module
 from coffee_shop_simulator import CoffeeShopSimulator
 
-# print welcome message
-welcome()
+# If save file exists, see if the player wants to load it
+run_game = True
+if Path(CoffeeShopSimulator.SAVE_FILE).is_file():
+    # Save game exists, do they want to load it?
+    response = CoffeeShopSimulator.prompt(
+        "There's a saved game. Do you want to load it? (Y/N)", True)
+    if re.search("y", response, re.IGNORECASE):
+        # Load the game and run!
+        with open(CoffeeShopSimulator.SAVE_FILE, mode="rb") as f:
+            game = pickle.load(f)
+            game.run()
+            # We don't need to run the game again
+            run_game = False
+    else:
+        print("HINT: If you don't want to see this prompt again, remove the " + CoffeeShopSimulator.SAVE_FILE + " file.\n")
 
-# Get name and store name
-t_name = prompt("What is your name?")
-t_shop_name = prompt(f"What is the name of {t_name}'s coffee shop?")
-
-# Create the game object
-game = CoffeeShopSimulator(t_name, t_shop_name)
-
-# Run the game
-game.run()
+if run_game:
+    # Create the game object and run it!
+    game = CoffeeShopSimulator()
+    game.run()
 
 # Say goodbye
 print("\n Thanks for playing. Have a great rest of your day! \n")
