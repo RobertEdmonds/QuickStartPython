@@ -1,0 +1,27 @@
+The Internet 
+    Chapter Overview
+        - Python has a wide assortment of modules for internet functionality
+        - The urllib module makes it easy to interact with web pages 
+        - You can send email with Python's SMTP support
+
+    Fetching a Web Page 
+        - URL = Uniform Resource Locator or web address
+        - GET request = tells the wep server that the browser would like the contents of a page 
+        - Sample internet.py lines(1-37)
+            - unescape from html library
+                - prevents any special characters from interfering in out search
+            - after we fetch the content 
+                - we unescape the page content string
+            - then we have regex search for a match 
+                - that has elevation_m with a space on each side of a equal sign and pulls the number
+            - finally pull the number out of the match which would be at index 1
+
+    Saving a Web Page 
+        - retrieve a web page and then save the contents of that string to a file with the html file extension
+        - Sample save_web.py 
+            - we open the file for writing in binary mode 
+                - This preserve the encoding method from the HTML that we download from the web server
+    
+    Sending an Email 
+        - This is a general overview of the code needed to send emails
+        - Sample email.py
