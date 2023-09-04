@@ -1,0 +1,25 @@
+Debugging Python Code 
+    Chapter Overview
+        - Debugging is the art of finding and fixing problems in code 
+        - Logging is very useful for finding bugs
+        - VScode can be a huge help in debugging 
+    
+    Logging 
+        - Logging = the process of writing diagnostic data to the screen 
+            - i.e. print function 
+        Displaying Data on the Screen 
+            - Most often used techniques
+                - print out the variable before, during and after whatever misbehaving function calls them 
+            - Sample debug.py lines(2 - 13)
+            - print("Reached first function")
+            - print("Inside the Loop")
+            - disadvantages 
+                - It can get messy
+            - We can create a function that displays the data we want to show only if a variable named debug is set to true 
+                - Sample debug.py lines(15 - 20)
+                - When launching we can set it to False
+        Logging to Disk 
+            - if we don't happen to see the debugging message, logging to disk is a helpful tool
+            - more durable and provides a better record of more complex events
+            - Sample debug.py lines(22 - 28)
+                - import logging module 
