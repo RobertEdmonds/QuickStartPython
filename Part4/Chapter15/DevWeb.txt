@@ -1,0 +1,12 @@
+Developing Websites
+    Chapter Overview
+        - Python excels at website development
+        - Popular lightweight frameworks include web.py and Flask
+        - Django offers a fully featured website development stack
+
+    web.py 
+        - web.py is a frameworks
+        - To install terminal
+            - pip3 install web.py 
+            - pip manages our Python code dependencies, allowing us to request the install of a particular module 
+        - Sample in website.py
