@@ -10,3 +10,42 @@ Developing Websites
             - pip3 install web.py 
             - pip manages our Python code dependencies, allowing us to request the install of a particular module 
         - Sample in website.py
+            - first we import the web module, equal to the web.py we downloaded
+            - Next we define a tuple that can contain multiple URL patterns and the class that handles them
+                - will be handled by the home class
+                    - classes for databases are lower cased
+                - the URL pattern is in regex
+            - Then we create an object using the web.application
+                - Takes two arguments 
+                    - the tuple the URL is patterning off of and matching class names 
+                    - a list of global variables
+                        - global variables = a variable that is within the scope of the main program
+            - Next we define the class home
+                - has one method which is GET 
+                    - has two variables
+                        - self
+                        - name 
+                            - name is the argument after the port 
+                - Then we use the web.header to set Content-Type: text/html
+                    - this tells the web browser how to interpret it 
+        - IP Address = internet protocol address, is an identifier used to differentiate devices on a network
+        - Port = more specific than a IP Address
+        - More info https://webpy.org 
+
+    Flask
+        - both web.py and flask are lightweight systems
+        - Sample hello_flask.py ./vscode/launch.json /utils/__init__.py
+
+    Connecting to a Database 
+
+    Django
+        - Includes
+            - Search Engine Optimization
+                - optimizing web pages so that they rank well in search engine results
+            - Caching
+                - process of preloading frequently accessed content from a slower storage mechanism and keeping it in memory for fast retrieval
+            - Content Delivery Networks
+                - globally distributed media servers that distribute images and other website assets much more quickly than a normal web server 
+            - Object Relational Mapping
+                - an interface to the database that abstracts tables as classes and the rows of data as objects
+                
