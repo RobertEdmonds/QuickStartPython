@@ -48,4 +48,7 @@ Developing Websites
                 - globally distributed media servers that distribute images and other website assets much more quickly than a normal web server 
             - Object Relational Mapping
                 - an interface to the database that abstracts tables as classes and the rows of data as objects
-                
+    
+    JSON 
+        - This package will help turn python data into json data 
+        - Sample json.py
