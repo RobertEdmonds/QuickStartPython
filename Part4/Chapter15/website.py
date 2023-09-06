@@ -3,15 +3,15 @@
 import web
 
 # Define the routes web.py will respond to
-routes = {
+routes = (
     "/(.*)", "home"
-}
+)
 
 # Create app object, providing routes and globals as arguments
 app = web.application(routes, globals())
 
 # Define the home class which will respond to our default route
-class Home:
+class home:
     # Method to respond to GET requests
     def GET(self, name):
         """Responds to get request for the home class"""
@@ -21,9 +21,8 @@ class Home:
         if not name:
             name = "World"
         # return string to display
-        return f"<h1>Hello, {name}!</h1>"
+        return "<h1>Hello, " + name + "!</h1>"
 
 # Make sure we are in the main program scope, then run!
 if __name__ == "__main__":
     app.run()
-    
