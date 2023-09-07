@@ -1,0 +1,33 @@
+Interfacing with SQLite
+    Chapter Review
+        - SQLite is a simple, cross-platform database engine
+        - A table is like a spreadsheet with columns and rows
+        - SQL statements can SELECT, INSERT, UPDATE, and DELETE data
+    
+    SELECT
+        - select is the get function of SQLite
+            - select * from tables limit 5;
+                - select * = get all the columns 
+                - from tables = from the plural of the table name 
+                - limit 5 = I only want to see the first 5
+
+    INSERT
+        - adding a new row to the table selected
+            - insert into tables (column1, column2) values (x, y);
+                - insert into tables = the plural of the table you are going to be adding this row
+                - (column1, column2) = the columns you would like to add to  
+                - values (x, y) = the value you would like for the columns you selected
+
+    UPDATE
+        - Edit an existing row 
+            - update tables set column1 = "value1", column2 = intValue where id = x;
+                - update tables = the plural version of the table you would like to update
+                - set column1 = "value1", column2 = intValue = find the columns and values you would like to edit 
+                - where id = x; = find the row with the id value for editing
+
+    DELETE
+        - Delete an existing row 
+            - delete from tables where id = x;
+
+    Querying Data with Python
+        - Sample in sql.py           
