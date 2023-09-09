@@ -43,6 +43,9 @@ class CoffeeShopSimulator:
         # Possible temperatures
         self.temps = self.make_temp_distribution()
 
+    def __repr__(self) -> str:
+        return "Test player_name:% s shop_name:% s day:% s cash:% s inventory:% s temp:% s" % (self.player_name, self.shop_name, self.day, self.cash, self.coffee_inventory, self.temps)
+
     def run(self):
         print("\nOk, let's get started. Have fun!")
 
@@ -172,7 +175,6 @@ class CoffeeShopSimulator:
 
     def increment_day(self):
         self.day += 1
-        return self.day
 
     def daily_stats(self, temperature):
         print("You have $" + str(self.cash) +

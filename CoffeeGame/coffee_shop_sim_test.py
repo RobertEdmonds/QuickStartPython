@@ -24,7 +24,11 @@ class CoffeeShopSimTest(unittest.TestCase):
         """Test the returns x_of_y with a list of string elements"""
         string_list = ["A", "A", "A", "A", "A"]
         self.assertEqual(CoffeeShopSimulator.x_of_y(5, "A"), string_list)
-
+    # to act as self in testing
+    test = CoffeeShopSimulator()
+    
+    def test_increment_day(self):
+        self.assertEqual(CoffeeShopSimulator.increment_day(self.test), 2)
 
 if __name__ == '__main__':
     unittest.main()
