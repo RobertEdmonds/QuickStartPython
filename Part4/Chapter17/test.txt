@@ -1,0 +1,25 @@
+Test-Driver development
+    Chapter Overview
+        - Test-driven development makes for better code 
+        - Unit testing ensures proper operation of foundation components
+        - Strive for good test coverage
+    - Test-driven development = a paradigm in programming that encourages developers to write a test first to make sure their code does what it is supposed to do, then write the function and run the test
+    - Regression = which occurs when code that was previously working breaks
+
+    Getting Started with Unit testing
+        - Unit Testing = individual check on specific methods, functions, and other well-defined code blocks that ensure that the application is working as expected
+
+    Assertions
+        - lets us test the outputs of our code
+        assertEqual
+            - checks to see if the first value is equal to the second
+        assertNotEqual
+            - checks to see if the first value is not equal to the second
+        assertTrue
+            - checks to see if the statement is true 
+        assertFalse
+            - checks to see if the statement is false 
+    
+    Test Driven Design
+        - The most common issue uncovered by test-driven development is lack of units within a program
+        - Rather than having a long collection of lines of code that do a complicated task, break it down into simpler functions

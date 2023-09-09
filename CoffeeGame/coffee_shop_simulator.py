@@ -172,6 +172,7 @@ class CoffeeShopSimulator:
 
     def increment_day(self):
         self.day += 1
+        return self.day
 
     def daily_stats(self, temperature):
         print("You have $" + str(self.cash) +
